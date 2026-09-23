@@ -1,0 +1,24 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Local data and generated output
+*.db
+*.db-journal
+app_logging/
+*.csv
+
+# Python caches and tests
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

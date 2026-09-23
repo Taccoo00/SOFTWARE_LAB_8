@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Reset access · RoseLab{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block content %}
+<main class="centered-page">
+  <section class="form-card narrow">
+    <a class="back-link" href="{{ url_for('login') }}">← Back to sign in</a>
+    <span class="eyebrow dark">Account recovery</span><h1>Let’s restore your access</h1>
+    <p class="muted">Your new password becomes active only after an administrator approves the request.</p>
+    <form method="post" class="form-stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Username or email<input name="identifier" required></label>
+      <label>New password<input type="password" name="new_password" minlength="8" required></label>
+      <label>Confirm new password<input type="password" name="confirm_password" minlength="8" required></label>
+      <button class="button primary wide" type="submit">Submit request</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

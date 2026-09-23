@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{% block title %}RoseLab Inventory{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  {% if session.get('username') %}
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <a class="brand" href="{{ url_for('dashboard') }}" aria-label="Dashboard">
+        <span class="brand-mark">RL</span>
+        <span><strong>RoseLab</strong><small>Inventory studio</small></span>
+      </a>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="side-link active" href="{{ url_for('dashboard') }}"><span class="side-icon">⌂</span>Dashboard</a>
+        <a class="side-link" href="{{ url_for('profile') }}"><span class="side-icon">♡</span>My profile</a>
+        <a class="side-link" href="{{ url_for('export_inventory') }}"><span class="side-icon">↓</span>Export inventory</a>
+        {% if session.role == 'ADMIN' %}<a class="side-link" href="{{ url_for('export_borrow_audit') }}"><span class="side-icon">≡</span>Borrow audit</a>{% endif %}
+      </nav>
+      <div class="side-account">
+        <div class="account-row"><span class="avatar">{{ session.username[0]|upper }}</span><span><strong>{{ session.username }}</strong><small>{{ session.role }}</small></span></div>
+        <form action="{{ url_for('logout') }}" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="button small" type="submit">Log out</button>
+        </form>
+      </div>
+    </aside>
+    <section class="app-content">
+      <header class="mobile-header">
+        <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">RL</span><span><strong>RoseLab</strong><small>Inventory studio</small></span></a>
+        <form action="{{ url_for('logout') }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button small" type="submit">Log out</button></form>
+      </header>
+  {% endif %}
+
+  <div class="flash-stack" aria-live="polite">
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="flash {{ category }}">{{ message }}<button type="button" aria-label="Dismiss">&times;</button></div>
+    {% endfor %}
+  </div>
+
+  {% block content %}{% endblock %}
+  <footer>RoseLab Campus Hardware Inventory · {{ current_year }}</footer>
+
+  {% if session.get('username') %}
+    </section>
+  </div>
+  {% endif %}
+</body>
+</html>

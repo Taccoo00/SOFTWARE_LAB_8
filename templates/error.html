@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} · RoseLab{% endblock %}
+{% block content %}<main class="centered-page"><section class="form-card narrow"><span class="error-code">{{ code }}</span><h1>Something went wrong</h1><p class="muted">{{ message }}</p><a class="button primary" href="{{ url_for('index') }}">Return home</a></section></main>{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Create account · RoseLab{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block content %}
+<main class="centered-page">
+  <section class="form-card narrow">
+    <a class="back-link" href="{{ url_for('login') }}">← Back to sign in</a>
+    <span class="eyebrow dark">Join the workspace</span><h1>Create your RoseLab access</h1>
+    <p class="muted">Passwords need 8 characters, one uppercase letter, one number, and one special character.</p>
+    <form method="post" class="form-stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Username<input name="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9]+" required></label>
+      <label>Email address<input type="email" name="email" required></label>
+      <label>Account role<select name="role"><option value="USER">User</option><option value="ADMIN">Administrator</option></select></label>
+      <label>Password<span class="password-field"><input id="register-password" type="password" name="password" minlength="8" required><button type="button" class="show-password" data-target="register-password">Show</button></span></label>
+      <button class="button primary wide" type="submit">Create account</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

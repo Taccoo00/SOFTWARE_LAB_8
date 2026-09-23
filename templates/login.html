@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Sign in · RoseLab{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+{% block content %}
+<main class="auth-shell">
+  <section class="auth-panel">
+    <div class="auth-card">
+      <a class="brand auth-brand" href="{{ url_for('login') }}"><span class="brand-mark">RL</span><span><strong>RoseLab Inventory</strong><small>Campus equipment portal</small></span></a>
+      <span class="eyebrow dark">Welcome back</span>
+      <h2>Sign in to your workspace</h2>
+      <p class="muted">Use your username or registered email address.</p>
+      <form method="post" class="form-stack">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Username or email<input name="identifier" autocomplete="username" required autofocus></label>
+        <label>Password<span class="password-field"><input id="login-password" type="password" name="password" autocomplete="current-password" required><button type="button" class="show-password" data-target="login-password">Show</button></span></label>
+        <button class="button primary wide" type="submit">Sign in</button>
+      </form>
+      <div class="auth-links"><a href="{{ url_for('register') }}">Create account</a><a href="{{ url_for('reset_request') }}">Reset or unlock</a></div>
+    </div>
+  </section>
+  <section class="auth-visual">
+    <div class="visual-content">
+      <span class="eyebrow">Organized with care</span>
+      <h1>A softer way to manage the lab.</h1>
+      <p>Keep every device, request, return, and approval organized in one calm and secure workspace.</p>
+      <div class="visual-grid" aria-hidden="true">
+        <div class="visual-chip"><strong>01</strong><span>Track</span></div>
+        <div class="visual-chip"><strong>02</strong><span>Borrow</span></div>
+        <div class="visual-chip"><strong>03</strong><span>Return</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Profile · RoseLab{% endblock %}
+{% block content %}
+<main class="page compact-page">
+  <a class="back-link" href="{{ url_for('dashboard') }}">← Dashboard</a>
+  <section class="form-card narrow">
+    <span class="eyebrow dark">My account</span><h1>{{ session.username }}</h1>
+    <dl class="profile-list"><div><dt>Email</dt><dd>{{ session.email or 'Not provided' }}</dd></div><div><dt>Role</dt><dd>{{ session.role }}</dd></div></dl>
+    <h2>Change password</h2>
+    <form method="post" class="form-stack">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Current password<input type="password" name="current_password" required></label>
+      <label>New password<input type="password" name="new_password" minlength="8" required></label>
+      <label>Confirm new password<input type="password" name="confirm_password" minlength="8" required></label>
+      <button class="button primary" type="submit">Update password</button>
+    </form>
+  </section>
+</main>
+{% endblock %}
